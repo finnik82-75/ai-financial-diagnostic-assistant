@@ -1,43 +1,171 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8" />
-  <title>AI Financial Diagnostic Assistant</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-</head>
-<body>
-  <button class="chat-launcher" id="chat-launcher" aria-label="Открыть ассистента">
-    <span>💬</span>
-  </button>
-
-  <div class="chat-widget" id="chat-widget" style="display:none;">
-    <div class="chat-header">
-      <div class="chat-header-left">
-        <div class="avatar">AI</div>
-        <div>
-          <div class="chat-title">Финансовая диагностика</div>
-          <div class="chat-subtitle">Вопросы о прибыли, расходах и денежном потоке</div>
+{% extends "base.html" %}
+{% block title %}Архитектура бизнеса | Финансовая диагностика{% endblock %}
+{% block content %}
+<header class="site-header fixed-top">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#home">Архитектура бизнеса</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainMenu">
+                <ul class="navbar-nav ms-auto me-3">
+                    <li class="nav-item"><a class="nav-link" href="#home">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#problems">Проблемы</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#solution">Решение</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#cases">Кейсы</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#workflow">Как работаем</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacts">Контакты</a></li>
+                </ul>
+                <a class="btn btn-brand" href="#contacts">Оставить заявку</a>
+            </div>
         </div>
-      </div>
-      <button class="chat-close" id="chat-close" aria-label="Закрыть чат">×</button>
-    </div>
-    <div class="chat-messages" id="chat-messages"></div>
-    <div class="chat-footer">
-      <input
-        id="chat-input"
-        class="chat-input"
-        placeholder="Напишите вопрос..."
-      />
-      <button id="chat-send" class="chat-send">
-        <span>➤</span>
-      </button>
-    </div>
-  </div>
+    </nav>
+</header>
 
-  <script>
-    window.__API_BASE__ = {{ api_base | tojson }};
-  </script>
-  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
-</body>
-</html>
+<main id="home">
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-card">
+                <h1>Каждый месяц бизнес может терять от 300 000 ₽ — покажу, где именно</h1>
+                <p class="lead">Если выручка есть, а денег не хватает, за 1-3 дня разберем потери и дадим понятный план действий.</p>
+                <a class="btn btn-brand btn-lg" href="#contacts">Получить разбор бизнеса</a>
+                <p class="hero-note">Для собственников малого и среднего бизнеса с выручкой от 5 до 50 млн ₽ в месяц.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="problems" class="section-block">
+        <div class="container">
+            <h2>Какие проблемы решаю</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Выручка растет, а на счете по-прежнему не хватает денег</div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Деньги уходят каждый день, но куда именно - неясно</div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Решения принимаются на ощущениях, потому что отчетам не доверяете</div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Не понимаете реальную прибыль: по отчету плюс, по факту ноль</div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Кассовые разрывы повторяются, платежи тушатся в последний момент</div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">Собственник постоянно докладывает свои деньги, чтобы закрыть месяц</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution" class="section-block section-dark">
+        <div class="container">
+            <h2>Что получает клиент</h2>
+            <div class="row g-3">
+                <div class="col-md-6"><div class="benefit-item"><span class="benefit-icon">₽</span><span>Понимаете, сколько бизнес реально зарабатывает в месяц</span></div></div>
+                <div class="col-md-6"><div class="benefit-item"><span class="benefit-icon">%</span><span>Видите, где уходят деньги и какие расходы режут прибыль</span></div></div>
+                <div class="col-md-6"><div class="benefit-item"><span class="benefit-icon">📊</span><span>Получаете отчеты на понятном языке без сложных таблиц</span></div></div>
+                <div class="col-md-6"><div class="benefit-item"><span class="benefit-icon">✔</span><span>Возвращаете контроль денег: знаете, сколько можно платить и когда</span></div></div>
+                <div class="col-md-6"><div class="benefit-item"><span class="benefit-icon">⏱</span><span>Экономите 5-8 часов в неделю на ручном разборе цифр</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cases" class="section-block">
+        <div class="container">
+            <h2>Кейсы</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <article class="case-card">
+                        <h3>Автоматизация финансового анализа</h3>
+                        <p><strong>Задача:</strong> Собственник тратил несколько часов на разбор отчетов и не понимал реальную картину бизнеса.</p>
+                        <p><strong>Решение:</strong> Разработан AI-ассистент на основе промпт-инжиниринга для анализа БДР и ДДС.</p>
+                        <p><strong>Результат:</strong> Разбор отчетов сократился с 4 часов до 15 минут, решения по деньгам стали приниматься в день обращения.</p>
+                    </article>
+                </div>
+                <div class="col-lg-4">
+                    <article class="case-card">
+                        <h3>Поиск потерь в бизнесе</h3>
+                        <p><strong>Задача:</strong> Выручка есть, но прибыль низкая, непонятно где теряются деньги.</p>
+                        <p><strong>Решение:</strong> Проведена диагностика финансов с использованием AI-анализа.</p>
+                        <p><strong>Результат:</strong> Нашли более 1 млн ₽ потерь в месяц и вернули эту сумму в прибыль без роста выручки.</p>
+                    </article>
+                </div>
+                <div class="col-lg-4">
+                    <article class="case-card">
+                        <h3>Упрощение отчетности для собственника</h3>
+                        <p><strong>Задача:</strong> Финансовые отчеты сложные, собственник не использует их в управлении.</p>
+                        <p><strong>Решение:</strong> Настроена система автоматической интерпретации отчетов через AI.</p>
+                        <p><strong>Результат:</strong> Собственник начал читать ключевые цифры за 7 минут вместо 2 часов и быстрее реагировать на просадки.</p>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="workflow" class="section-block">
+        <div class="container">
+            <h2>Как проходит работа</h2>
+            <ol class="workflow-list">
+                <li>Вы отправляете данные по БДР, ДДС или управленческим отчетам</li>
+                <li>Я провожу диагностику и AI-анализ</li>
+                <li>Вы получаете понятный отчет с выводами</li>
+                <li>Обсуждаем, что делать в первую очередь</li>
+            </ol>
+        </div>
+    </section>
+
+    <section class="section-block cta-block">
+        <div class="container text-center">
+            <h2>За 1-3 дня покажу, где бизнес теряет деньги и как вернуть их в прибыль</h2>
+            <p>Оставьте заявку сейчас и получите конкретный разбор: где потери, что исправить в первую очередь и как усилить финансовый контроль.</p>
+            <a class="btn btn-brand btn-lg" href="#contacts">Найти потери в бизнесе</a>
+        </div>
+    </section>
+
+    <section id="contacts" class="section-block">
+        <div class="container">
+            <h2>Оставьте заявку</h2>
+            <p class="section-subtitle">Заполните форму, и я свяжусь с вами для первичного разбора.</p>
+            <div class="form-wrap">
+                <form method="post" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="name">{{ form.name.label.text }}</label>
+                            {{ form.name(class_="form-control", id="name", placeholder="Ваше имя") }}
+                            {% for error in form.name.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="phone">{{ form.phone.label.text }}</label>
+                            {{ form.phone(class_="form-control", id="phone", placeholder="+7 (___) ___-__-__") }}
+                            {% for error in form.phone.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="email">{{ form.email.label.text }}</label>
+                            {{ form.email(class_="form-control", id="email", placeholder="you@company.ru") }}
+                            {% for error in form.email.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="message">{{ form.message.label.text }}</label>
+                            {{ form.message(class_="form-control", id="message", rows="4", placeholder="Кратко опишите ситуацию в бизнесе") }}
+                            {% for error in form.message.errors %}<div class="text-danger small mt-1">{{ error }}</div>{% endfor %}
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-brand mt-4">Отправить заявку</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+        <span>Архитектура бизнеса</span>
+        <span>© {{ current_year }} Все права защищены</span>
+    </div>
+</footer>
+{% endblock %}

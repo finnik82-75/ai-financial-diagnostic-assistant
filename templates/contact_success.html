@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Заявка отправлена | Архитектура бизнеса{% endblock %}
+{% block content %}
+<section class="success-page">
+    <div class="container">
+        <div class="success-card text-center">
+            <h1>Спасибо, заявка отправлена</h1>
+            <p>Свяжусь с вами в ближайшее время для первичного финансового разбора.</p>
+            <a href="{{ url_for('index') }}" class="btn btn-brand">Вернуться на главную</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

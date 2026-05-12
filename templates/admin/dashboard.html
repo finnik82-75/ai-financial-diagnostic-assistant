@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}Админ-панель | Архитектура бизнеса{% endblock %}
+{% block content %}
+<section class="admin-dashboard-page">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Админ-панель</h1>
+            <a href="{{ url_for('admin_logout') }}" class="btn btn-outline-light">Выйти</a>
+        </div>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Всего заявок</span>
+                    <strong>{{ stats.total }}</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Новых заявок</span>
+                    <strong>{{ stats.new }}</strong>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="stat-card">
+                    <span>Прочитанных</span>
+                    <strong>{{ stats.read }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive dashboard-table-wrap">
+            <table class="table table-striped table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Дата</th>
+                        <th>Имя</th>
+                        <th>Телефон</th>
+                        <th>Email</th>
+                        <th>Комментарий</th>
+                        <th>Статус</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in requests %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.message }}</td>
+                        <td>
+                            {% if item.is_read %}
+                                <span class="badge text-bg-success">Прочитано</span>
+                            {% else %}
+                                <span class="badge text-bg-warning">Новое</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="d-flex gap-2">
+                                {% if not item.is_read %}
+                                <form method="post" action="{{ url_for('mark_read', request_id=item.id) }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button class="btn btn-sm btn-outline-success" type="submit">Прочитано</button>
+                                </form>
+                                {% endif %}
+                                <form method="post" action="{{ url_for('delete_request', request_id=item.id) }}">
+                                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Удалить</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="8" class="text-center py-4">Заявок пока нет.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}
