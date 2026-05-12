@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Financial Diagnostic Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <button class="chat-launcher" id="chat-launcher" aria-label="Открыть ассистента">
+    <span>💬</span>
+  </button>
+
+  <div class="chat-widget" id="chat-widget" style="display:none;">
+    <div class="chat-header">
+      <div class="chat-header-left">
+        <div class="avatar">AI</div>
+        <div>
+          <div class="chat-title">Финансовая диагностика</div>
+          <div class="chat-subtitle">Вопросы о прибыли, расходах и денежном потоке</div>
+        </div>
+      </div>
+      <button class="chat-close" id="chat-close" aria-label="Закрыть чат">×</button>
+    </div>
+    <div class="chat-messages" id="chat-messages"></div>
+    <div class="chat-footer">
+      <input
+        id="chat-input"
+        class="chat-input"
+        placeholder="Напишите вопрос..."
+      />
+      <button id="chat-send" class="chat-send">
+        <span>➤</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    window.__API_BASE__ = {{ api_base | tojson }};
+  </script>
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
