@@ -202,9 +202,3 @@ curl -X POST http://127.0.0.1:8000/chat -H "Content-Type: application/json" -d "
 - аккуратную работу с **секретами** (`.env` не в git) и воспроизводимым окружением (`requirements.txt`).
 
 Ссылка на репозиторий: [github.com/finnik82-75/ai-financial-diagnostic-assistant](https://github.com/finnik82-75/ai-financial-diagnostic-assistant)
-
----
-
-## Лицензия
-
-Учебный/портфолио-проект; при использовании кода учитывайте условия лицензий зависимостей и OpenAI API.
