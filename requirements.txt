@@ -4,3 +4,9 @@ Flask-Login
 Flask-WTF
 WTForms
 email-validator
+fastapi
+uvicorn
+python-dotenv
+openai
+numpy
+faiss-cpu

@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const messagesEl = document.getElementById("ai-chat-messages");
     const inputEl = document.getElementById("ai-chat-input");
     const sendBtn = document.getElementById("ai-chat-send");
-    const chatUrl = chatRoot.dataset.chatUrl || "http://72.56.241.226:8000/chat";
+    const chatUrl = chatRoot.dataset.chatUrl || "http://72.56.121.63:8000/chat";
 
     const scrollMessagesDown = () => {
         messagesEl.scrollTo({ top: messagesEl.scrollHeight, behavior: "smooth" });
